@@ -24,5 +24,3 @@ Sample input and outputs:
 -Server will repeat the process of prompting, but the request will not go to the client ( because of spoofed IP).
 -After 5s, Server on not getting the response, will drop the packet
 -Server will not send the response back, and print ( “Response not sent”).
-
-
