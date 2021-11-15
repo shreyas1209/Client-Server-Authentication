@@ -51,9 +51,4 @@ public class Client {
         System.out.println("\r\nConnected to Server: " +client.socket.getInetAddress());
         client.start();
     }
-
-
-
-
-
 }
