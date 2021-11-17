@@ -25,6 +25,10 @@ public class RequestPacket extends ActionPacket{
         super.setMessage(message);
     }
 
+    public String getRequestMessage(){
+        return super.displayMessage();
+    }
+
 
 
 
