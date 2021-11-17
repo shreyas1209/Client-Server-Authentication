@@ -15,6 +15,16 @@ public class ActionPacket implements Packet {
     }
 
 
+    public String getMessage() {
+        return message;
+    }
+
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+
     ActionPacket(String source,String destination){
         
         this.source = source;
@@ -33,12 +43,14 @@ public class ActionPacket implements Packet {
 
 
 
-    
     @Override
     public String displayMessage(){
         return this.message;
 
     }
+    
+
+    
     @Override
     public boolean actionComplete(){
         return this.actionComplete;
