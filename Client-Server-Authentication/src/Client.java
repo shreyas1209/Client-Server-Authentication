@@ -44,11 +44,11 @@ public class Client {
 
 
     public static void main(String[] args) throws NumberFormatException, UnknownHostException, Exception {
-        Client client = new Client(
+        Client myClient = new Client(
             InetAddress.getByName("127.0.0.1"), 
             Integer.parseInt("8000"));
 
-        System.out.println("\r\nConnected to Server: " +client.socket.getInetAddress());
-        client.start();
+        System.out.println("\r\nConnected to Server: " +myClient.socket.getInetAddress());
+        myClient.start();
     }
 }

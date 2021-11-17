@@ -12,10 +12,10 @@ public class Server {
         this.ipAddress = ipAddress;
         this.port = port;
         if(ipAddress != null && !ipAddress.isEmpty()){
-            this.socket = new ServerSocket(this.port,1,InetAddress.getByName(this.ipAddress));
+            this.socket = new ServerSocket(this.port, 1, InetAddress.getByName(this.ipAddress));
         }
         else{
-            this.socket = new ServerSocket(this.port,1,InetAddress.getLocalHost());
+            this.socket = new ServerSocket(this.port, 1, InetAddress.getLocalHost());
         }
     }
 
@@ -44,7 +44,7 @@ public class Server {
     }
     
     public static void main(String[] args) throws Exception {
-        Server myServer = new Server ("127.0.0.1",8000);//(args[0],Integer.parseInt(args[1]));
+        Server myServer = new Server ("127.0.0.1", 8000); //(args[0],Integer.parseInt(args[1]));
 
         System.out.println("\nRunning Server:"+
         "\nHost : "+ myServer.getSocket().getHostAddress()
@@ -52,7 +52,5 @@ public class Server {
 
         myServer.listen();
         
-    }
-    
-    
+    }   
 }
