@@ -17,9 +17,6 @@ public class ActionPacket implements Packet {
     }
 
 
-  
-
-
     ActionPacket(String packetType,String source,String destination){
         
         this.packetType = packetType;
@@ -36,12 +33,6 @@ public class ActionPacket implements Packet {
         this.source = source;
         this.destination = destination;
         this.protocol = protocol;
-    }
-
-
-
-    public String getMessage() {
-        return message;
     }
 
 

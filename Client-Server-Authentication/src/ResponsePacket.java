@@ -1,7 +1,7 @@
 import java.io.*;
 
 
-public class ResponsePacket implements Packet{
+public class ResponsePacket extends ActionPacket{
 
     private String source;
     private String destination;
@@ -9,8 +9,32 @@ public class ResponsePacket implements Packet{
     private String message;
 
 
-    ResponsePacket(String source, String destination, String message) {
+    ResponsePacket(){
 
+        super("Response");
+    }
+
+
+    ResponsePacket(String source,String destination){
+
+        super("Response",source,destination);
+
+    }
+
+    ResponsePacket(String source,String destination,String protocol){
+
+        super("Response",source,destination,protocol);
+    
+    }
+
+
+    public String getResponseMessage() {
+        return super.displayMessage();
+    }
+
+
+    public void setResponseMessage(String message) {
+        super.setMessage(message);
     }
 
 
