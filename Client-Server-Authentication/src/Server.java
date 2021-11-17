@@ -25,9 +25,14 @@ public class Server {
         String clientAddress = client.getInetAddress().getHostAddress();
         System.out.println("\nNew connection from : "+ clientAddress);
         inputStream = client.getInputStream();
-        dataInputStream = new DataInputStream(inputStream);
-        String msg = dataInputStream.readUTF();
-        System.out.println("The message sent from the socket was: "+ msg);
+        BufferedReader in = new BufferedReader(new InputStreamReader(client.getInputStream()));
+        while ( (data = in.readLine()) != null ) {
+            System.out.println("\r\nMessage from " + clientAddress + ": " + data);
+        }
+        
+        // dataInputStream = new DataInputStream(inputStream);
+        // String msg = dataInputStream.readUTF();
+        // System.out.println("The message sent from the socket was: "+ msg);
         
     }
 
@@ -50,7 +55,10 @@ public class Server {
         "\nHost : "+ myServer.getSocket().getHostAddress()
         +"\nPort :"+ myServer.getPort());
 
-        myServer.listen();
-        
+        try{
+            myServer.listen();
+        }catch(java.net.SocketException e){
+            System.out.println(e);
+        }
     }   
 }
