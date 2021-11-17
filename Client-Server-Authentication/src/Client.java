@@ -21,13 +21,13 @@ public class Client {
     private void start() throws IOException {
         String input;
 
-        while (true) {
+        //while (true) {
             //input = scanner.nextLine();
 
-            PrintWriter out =  new PrintWriter(this.socket.getOutputStream(), true);
-            out.println("Sarthak Bakland");
-            out.flush();
-        }
+        PrintWriter out =  new PrintWriter(this.socket.getOutputStream(), true);
+        out.println("Sarthak Bakland");
+        out.flush();
+        //}
     }
 
     public void sendRequest(){}
