@@ -1,24 +1,31 @@
 
 public class RequestPacket extends ActionPacket{
 
+
     RequestPacket(){
 
-        super();
+        super("Request");
 
     }
 
 
     RequestPacket(String source,String destination){
 
-        super(source,destination);
+        super("Request",source,destination);
 
     }
 
     RequestPacket(String source,String destination,String protocol){
 
-        super(source,destination,protocol);
+        super("Request",source,destination,protocol);
     
     }
+
+    public void setMessage(String message){
+        super.setMessage(message);
+    }
+
+
 
 
 
