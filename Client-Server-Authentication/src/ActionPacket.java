@@ -10,9 +10,9 @@ public class ActionPacket implements Packet {
 
     ActionPacket(String packetType){
         
-        this.packetType = packetType;
+        this.packetType = packetType; 
         this.source = "127.0.0.1";
-        this.destination = "8000";
+        this.destination = "127.0.0.1";
         this.protocol = "TCP/IP";
     }
 
