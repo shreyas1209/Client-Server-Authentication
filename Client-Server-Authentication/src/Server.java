@@ -43,12 +43,14 @@ public class Server {
         //need to implement it
     }
     
-    public static void main(String[] args) throws NumberFormatException, IOException {
-        Server myServer = new Server ("127.0.0.1x",8000);//(args[0],Integer.parseInt(args[1]));
+    public static void main(String[] args) throws Exception {
+        Server myServer = new Server ("127.0.0.1",8000);//(args[0],Integer.parseInt(args[1]));
 
         System.out.println("\nRunning Server:"+
         "\nHost : "+ myServer.getSocket().getHostAddress()
         +"\nPort :"+ myServer.getPort());
+
+        myServer.listen();
         
     }
     

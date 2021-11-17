@@ -22,10 +22,10 @@ public class Client {
         String input;
 
         while (true) {
-            input = scanner.nextLine();
+            //input = scanner.nextLine();
 
-            PrintWriter out = new PrintWriter(this.socket.getOutputStream(), true);
-            out.println(input);
+            PrintWriter out =  new PrintWriter(this.socket.getOutputStream(), true);
+            out.println("Sarthak Bakland");
             out.flush();
         }
     }
@@ -45,8 +45,8 @@ public class Client {
 
     public static void main(String[] args) throws NumberFormatException, UnknownHostException, Exception {
         Client client = new Client(
-            InetAddress.getByName(args[0]), 
-            Integer.parseInt(args[1]));
+            InetAddress.getByName("127.0.0.1"), 
+            Integer.parseInt("8000"));
 
         System.out.println("\r\nConnected to Server: " +client.socket.getInetAddress());
         client.start();
