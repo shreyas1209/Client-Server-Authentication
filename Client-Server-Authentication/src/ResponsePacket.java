@@ -9,13 +9,18 @@ public class ResponsePacket implements Packet{
     private String message;
 
 
+    ResponsePacket(String source, String destination, String message) {
+
+    }
+
+
     @Override
     public boolean actionComplete() {
         // TODO Auto-generated method stub
         return false;
     }
 
-
+ 
     @Override
     public String displayMessage() {
         // TODO Auto-generated method stub
