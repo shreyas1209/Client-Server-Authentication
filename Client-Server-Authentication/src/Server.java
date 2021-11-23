@@ -26,16 +26,19 @@ public class Server {
         System.out.println("\nNew connection from : "+ clientAddress);
         inputStream = client.getInputStream();
         BufferedReader in = new BufferedReader(new InputStreamReader(client.getInputStream()));
-        while ( (data = in.readLine()) != null ) {
-            System.out.println("\r\nMessage from " + clientAddress + ": " + data);
+        data = in.readLine();
+        
+        System.out.println("\r\nMessage from  Client at " + clientAddress + ": " + data);
+
+        if(data != null){
+            this.sendPromptMessage(client);
+
         }
-        in.close();
-        
-        // dataInputStream = new DataInputStream(inputStream);
-        // String msg = dataInputStream.readUTF();
-        // System.out.println("The message sent from the socket was: "+ msg);
-        
     }
+
+        
+        
+
 
     public InetAddress getSocket(){
         return this.socket.getInetAddress();
@@ -45,8 +48,15 @@ public class Server {
         return this.socket.getLocalPort();
     }
 
-    public void sendResponse(){
-        //need to implement it
+    public void sendPromptMessage(Socket client) throws IOException{
+
+        PrintWriter serverOut = new PrintWriter(client.getOutputStream(),true);
+        serverOut.println("Have you sent the request packet? ");
+        serverOut.flush();
+        //serverOut.close();
+
+
+        
     }
     
     public static void main(String[] args) throws Exception {

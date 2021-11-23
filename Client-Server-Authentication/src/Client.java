@@ -18,23 +18,23 @@ public class Client {
     }
 
 
-    private void start() throws IOException {
-        /*String input;
-
-        //while (true) {
-            //input = scanner.nextLine();
-
-        PrintWriter out =  new PrintWriter(this.socket.getOutputStream(), true);
-        out.println("Sarthak Bakland");
-        out.flush();
-        out.close();*/
-
-    
-        //}
+    private void start() throws Exception {
+        
         this.sendRequest();
     }
 
-    public void sendRequest() throws IOException{
+    public void listen() throws Exception{
+        String data = null;
+        BufferedReader in = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
+        String serverAddress = this.socket.getInetAddress().getHostAddress();
+        data = in.readLine();
+        {
+            System.out.println("\r\nMessage from Server at  " + serverAddress + ": " + data);
+        }
+        //in.close();
+    }
+
+    public void sendRequest() throws Exception{
         String currentIP = this.getIPAddress();
 
         RequestPacket request = new RequestPacket(currentIP,this.socket.getInetAddress().getHostAddress(),"TCP/IP");
@@ -42,7 +42,11 @@ public class Client {
         PrintWriter out =  new PrintWriter(this.socket.getOutputStream(), true);
         out.println(request.getRequestMessage());
         out.flush();
-        out.close();
+        //out.close();
+        
+
+        
+        
 
     }
 
@@ -74,6 +78,7 @@ public class Client {
 
         System.out.println("\r\nConnected to Server: " +myClient.socket.getInetAddress());
         myClient.start();
+        myClient.listen();
         
     }
 }
