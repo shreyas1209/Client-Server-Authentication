@@ -34,6 +34,19 @@ public class Server {
             this.sendPromptMessage(client);
 
         }
+
+        String authenticationString = in.readLine();
+        System.out.println("\r\nMessage from  Client at " + clientAddress + ": " + authenticationString);
+        if(authenticationString .equals("yes")){
+            System.out.println("Response sent!");
+            this.sendResponse(client);
+            in.close();
+
+        }
+        else if(authenticationString.equals("no")){
+            System.out.println("Response not sent!");
+            //in.close();
+        }
     }
 
     
@@ -51,6 +64,15 @@ public class Server {
         serverOut.println("Have you sent the request packet? ");
         serverOut.flush();
         //serverOut.close();     
+    }
+
+    public void sendResponse(Socket client) throws IOException{
+        ResponsePacket response = new ResponsePacket(this.toString(),client.getInetAddress().getHostAddress(),"TCP/IP");
+        response.setMessage("Response sent");
+        PrintWriter serverOut = new PrintWriter(client.getOutputStream(),true);
+        serverOut.println(response.getResponseMessage());
+        serverOut.flush();
+
     }
     
     public static void main(String[] args) throws Exception {

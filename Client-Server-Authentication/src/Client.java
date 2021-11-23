@@ -45,11 +45,24 @@ public class Client {
         //out.close();
     }
 
-    public void getRequest(){
+    public void getResponse() throws IOException{
+
+        String response = null;
+        BufferedReader responseReader = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
+        String serverAddress = this.socket.getInetAddress().getHostAddress();
+         response = responseReader.readLine();
+        if (response != null){
+            System.out.println("SUCCESS: Response received!!!");
+        }
+        else{
+            System.out.println("ERROR: Authentication failure!!!");
+        }
+        //responseReader.close();
+
+
 
         
 
-        //Should this return request???
     }
 
     public void authenticate(String validate) throws Exception{
@@ -60,9 +73,9 @@ public class Client {
             out.flush();
         }
 
-        else{
-            out.println("Inavlid Entry");
-        }
+        // else{
+        //     out.println("Inavlid Entry");
+        // }
 
     }
 
@@ -83,6 +96,7 @@ public class Client {
         System.out.println("\r\nConnected to Server: " +myClient.socket.getInetAddress());
         myClient.start();
         myClient.listen();
-        
+        myClient.authenticate("yes");
+        myClient.getResponse();
     }
 }
