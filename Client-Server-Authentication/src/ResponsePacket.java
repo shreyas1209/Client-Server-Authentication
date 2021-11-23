@@ -13,13 +13,12 @@ public class ResponsePacket extends ActionPacket{
 
     ResponsePacket(String source,String destination){
 
-        super("Response",source,destination);
-
+        super("Response", source, destination);
     }
 
     ResponsePacket(String source,String destination,String protocol){
 
-        super("Response",source,destination,protocol);
+        super("Response", source, destination, protocol);
     
     }
 
@@ -32,7 +31,4 @@ public class ResponsePacket extends ActionPacket{
     public void setResponseMessage(String message) {
         super.setMessage(message);
     }
-
-
-
 }

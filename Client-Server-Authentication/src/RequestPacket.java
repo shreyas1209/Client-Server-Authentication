@@ -5,20 +5,17 @@ public class RequestPacket extends ActionPacket{
     RequestPacket(){
 
         super("Request");
-
     }
 
 
     RequestPacket(String source,String destination){
 
-        super("Request",source,destination);
-
+        super("Request", source, destination);
     }
 
     RequestPacket(String source,String destination,String protocol){
 
-        super("Request",source,destination,protocol);
-    
+        super("Request", source, destination, protocol);
     }
 
     public void setMessage(String message){
@@ -27,12 +24,5 @@ public class RequestPacket extends ActionPacket{
 
     public String getRequestMessage(){
         return super.displayMessage();
-    }
-
-
-
-
-
-    
-    
+    }    
 }
