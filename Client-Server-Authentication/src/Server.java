@@ -29,6 +29,7 @@ public class Server {
         while ( (data = in.readLine()) != null ) {
             System.out.println("\r\nMessage from " + clientAddress + ": " + data);
         }
+        in.close();
         
         // dataInputStream = new DataInputStream(inputStream);
         // String msg = dataInputStream.readUTF();

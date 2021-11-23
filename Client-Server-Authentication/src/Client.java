@@ -19,7 +19,7 @@ public class Client {
 
 
     private void start() throws IOException {
-        String input;
+        /*String input;
 
         //while (true) {
             //input = scanner.nextLine();
@@ -27,15 +27,28 @@ public class Client {
         PrintWriter out =  new PrintWriter(this.socket.getOutputStream(), true);
         out.println("Sarthak Bakland");
         out.flush();
-        out.close();
+        out.close();*/
 
     
         //}
+        this.sendRequest();
     }
 
-    public void sendRequest(){}
+    public void sendRequest() throws IOException{
+        String currentIP = this.getIPAddress();
+
+        RequestPacket request = new RequestPacket(currentIP,this.socket.getInetAddress().getHostAddress(),"TCP/IP");
+        request.setMessage("Request!");
+        PrintWriter out =  new PrintWriter(this.socket.getOutputStream(), true);
+        out.println(request.getRequestMessage());
+        out.flush();
+        out.close();
+
+    }
 
     public void getRequest(){
+
+        
 
         //Should this return request???
     }
@@ -44,6 +57,13 @@ public class Client {
 
         return false;
     }
+
+    public String getIPAddress(){
+        return this.ip_address;
+
+    }
+
+
 
 
     public static void main(String[] args) throws NumberFormatException, UnknownHostException, Exception {
