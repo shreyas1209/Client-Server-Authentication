@@ -37,17 +37,12 @@ public class Client {
     public void sendRequest() throws Exception{
         String currentIP = this.getIPAddress();
 
-        RequestPacket request = new RequestPacket(currentIP,this.socket.getInetAddress().getHostAddress(),"TCP/IP");
+        RequestPacket request = new RequestPacket(currentIP, this.socket.getInetAddress().getHostAddress(), "TCP/IP");
         request.setMessage("Request!");
         PrintWriter out =  new PrintWriter(this.socket.getOutputStream(), true);
         out.println(request.getRequestMessage());
         out.flush();
         //out.close();
-        
-
-        
-        
-
     }
 
     public void getRequest(){
@@ -57,9 +52,18 @@ public class Client {
         //Should this return request???
     }
 
-    public boolean authenticate(){
+    public void authenticate(String validate) throws Exception{
+        
+        PrintWriter out =  new PrintWriter(this.socket.getOutputStream(), true);
+        if((validate == "yes") || (validate == "no")){
+            out.println(validate);
+            out.flush();
+        }
 
-        return false;
+        else{
+            out.println("Inavlid Entry");
+        }
+
     }
 
     public String getIPAddress(){

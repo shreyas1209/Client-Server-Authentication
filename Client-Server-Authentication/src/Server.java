@@ -36,10 +36,7 @@ public class Server {
         }
     }
 
-        
-        
-
-
+    
     public InetAddress getSocket(){
         return this.socket.getInetAddress();
     }
@@ -53,10 +50,7 @@ public class Server {
         PrintWriter serverOut = new PrintWriter(client.getOutputStream(),true);
         serverOut.println("Have you sent the request packet? ");
         serverOut.flush();
-        //serverOut.close();
-
-
-        
+        //serverOut.close();     
     }
     
     public static void main(String[] args) throws Exception {
