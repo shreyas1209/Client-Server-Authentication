@@ -68,7 +68,7 @@ public class Client {
     public void authenticate(String validate) throws Exception{
         
         PrintWriter out =  new PrintWriter(this.socket.getOutputStream(), true);
-        if((validate == "yes") || (validate == "no")){
+        if((validate.equals("yes")) || (validate.equals("no"))){
             out.println(validate);
             System.out.println("Message from Client to Server at "+this.socket.getInetAddress().getHostAddress()+": "+ validate );
             out.flush();
@@ -104,7 +104,7 @@ public class Client {
         myClient.listen();
         //System.out.println("Have you sent the request packet?");
         String ans = br.readLine().toLowerCase();
-        System.out.println(ans);
+        //System.out.println(ans);
         myClient.authenticate(ans);
         myClient.getResponse();
 
