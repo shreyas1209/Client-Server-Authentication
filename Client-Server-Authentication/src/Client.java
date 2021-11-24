@@ -1,20 +1,17 @@
 import java.io.*;
 import java.net.*;
-import java.util.Scanner;
+
 
 
 public class Client {
     
     private Socket socket;
     private String ip_address;
-    private OutputStream outputStream;
-    private DataOutputStream dataOutputStream;
-    private Scanner scanner;
+    
     
 
     private Client(InetAddress serverAddress, int serverPort) throws Exception {
         this.socket = new Socket(serverAddress, serverPort);
-        this.scanner = new Scanner(System.in);
     }
 
 
@@ -28,10 +25,9 @@ public class Client {
         BufferedReader in = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
         String serverAddress = this.socket.getInetAddress().getHostAddress();
         data = in.readLine();
-        {
-            System.out.println("\r\nMessage from Server at  " + serverAddress + ": " + data);
-        }
-        //in.close();
+        System.out.println("\r\nMessage from Server at  " + serverAddress + ": " + data);
+        
+
     }
 
     public void sendRequest() throws Exception{
@@ -41,8 +37,10 @@ public class Client {
         request.setMessage("Request!");
         PrintWriter out =  new PrintWriter(this.socket.getOutputStream(), true);
         out.println(request.getRequestMessage());
+        System.out.println("Message from Client to Server at "+this.socket.getInetAddress().getHostAddress()+": "+ request.getRequestMessage() );
+        
         out.flush();
-        //out.close();
+        
     }
 
     public void getResponse() throws IOException{
@@ -50,14 +48,16 @@ public class Client {
         String response = null;
         BufferedReader responseReader = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
         String serverAddress = this.socket.getInetAddress().getHostAddress();
-         response = responseReader.readLine();
+        response = responseReader.readLine();
         if (response != null){
             System.out.println("SUCCESS: Response received!!!");
+            System.out.println("Packet Information:\n");
+            System.out.println(response);
         }
         else{
             System.out.println("ERROR: Authentication failure!!!");
         }
-        //responseReader.close();
+        responseReader.close();
 
 
 
@@ -70,12 +70,11 @@ public class Client {
         PrintWriter out =  new PrintWriter(this.socket.getOutputStream(), true);
         if((validate == "yes") || (validate == "no")){
             out.println(validate);
+            System.out.println("Message from Client to Server at "+this.socket.getInetAddress().getHostAddress()+": "+ validate );
             out.flush();
         }
 
-        // else{
-        //     out.println("Inavlid Entry");
-        // }
+        
 
     }
 
@@ -88,15 +87,35 @@ public class Client {
 
 
     public static void main(String[] args) throws NumberFormatException, UnknownHostException, Exception {
-        
-        Client myClient = new Client(
-            InetAddress.getByName("127.0.0.1"), 
-            Integer.parseInt("8000"));
+        try{BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        System.out.println("Enter the Server IP Address: ");
+        String serverIP = br.readLine();
+        System.out.println("Enter the Server port to connect: ");
+        String serverPort = br.readLine();
+        System.out.println("Press Enter to authenticate!");
+        String enter = br.readLine();
+        if(enter != null){
+            Client myClient = new Client(
+            InetAddress.getByName(serverIP), 
+            Integer.parseInt(serverPort));
 
         System.out.println("\r\nConnected to Server: " +myClient.socket.getInetAddress());
         myClient.start();
         myClient.listen();
-        myClient.authenticate("yes");
+        //System.out.println("Have you sent the request packet?");
+        String ans = br.readLine().toLowerCase();
+        System.out.println(ans);
+        myClient.authenticate(ans);
         myClient.getResponse();
+
+        }
+    }catch(java.net.ConnectException e){
+        System.out.println(e);
+
+        }
+
+
+
+        
     }
 }

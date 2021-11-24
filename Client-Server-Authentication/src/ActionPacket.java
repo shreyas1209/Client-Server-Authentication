@@ -6,6 +6,7 @@ public class ActionPacket implements Packet {
     private String message;
     private boolean actionComplete;
     private String packetType;
+    private String data;
 
 
     ActionPacket(String packetType){
@@ -53,5 +54,17 @@ public class ActionPacket implements Packet {
     public boolean actionComplete(){
         return this.actionComplete;
 
+    }
+
+    public String getSource(){
+        return this.source;
+    }
+
+    public String getDestination(){
+        return this.destination;
+    }
+
+    public String getProtocol(){
+        return this.protocol;
     }
 }

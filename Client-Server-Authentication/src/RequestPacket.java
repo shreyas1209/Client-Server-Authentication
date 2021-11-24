@@ -25,4 +25,8 @@ public class RequestPacket extends ActionPacket{
     public String getRequestMessage(){
         return super.displayMessage();
     }    
+    @Override
+    public String toString(){
+        return this.getRequestMessage();
+    }
 }
