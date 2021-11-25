@@ -5,7 +5,6 @@ public class ResponsePacket extends ActionPacket{
 
     private String data;
 
-
     ResponsePacket(String data){
 
         super("Response");
@@ -23,7 +22,6 @@ public class ResponsePacket extends ActionPacket{
 
         super("Response", source, destination, protocol);
         this.data = data;
-    
     }
 
 

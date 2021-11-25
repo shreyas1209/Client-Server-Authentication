@@ -1,11 +1,9 @@
 
 public class RequestPacket extends ActionPacket{
 
-
     RequestPacket(){
         super("Request");
     }
-
 
     RequestPacket(String source,String destination){
         super("Request", source, destination);
