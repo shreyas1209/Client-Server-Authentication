@@ -6,8 +6,6 @@ public class ActionPacket implements Packet {
     private String message;
     private boolean actionComplete;
     private String packetType;
-    private String data;
-
 
     ActionPacket(String packetType){
         
