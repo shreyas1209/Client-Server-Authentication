@@ -36,7 +36,7 @@ public class Server {
 
         String authenticationString = in.readLine();
         System.out.println("\r\nMessage from  Client at " + clientAddress + ": " + authenticationString);
-        if(authenticationString .equals("yes")){
+        if(authenticationString.equals("yes")){
             System.out.println("Response sent!");
             this.sendResponse(client);
             in.close();

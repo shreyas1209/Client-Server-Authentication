@@ -6,7 +6,6 @@ public class ResponsePacket extends ActionPacket{
     private String data;
 
 
-
     ResponsePacket(String data){
 
         super("Response");

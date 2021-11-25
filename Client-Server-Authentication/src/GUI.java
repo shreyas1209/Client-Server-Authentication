@@ -7,26 +7,28 @@ public class GUI implements ActionListener{
     private int count = 0;
     private JLabel label;
     private JFrame frame;
-    private JPanel panel;
+    private JTextField textField; 
 
     public GUI() {
         frame = new JFrame();
-        
+        textField = new JTextField("Enter Server IP address");
+        textField.setBounds(20, 25, 200 ,30);
+
         JButton button = new JButton("Send Request");
         button.addActionListener(this);
+        button.setBounds(2000, 500, 200, 30);
 
         label = new JLabel("Number of CLicks: 0"); 
 
-        panel = new JPanel();
-        panel.setBorder(BorderFactory.createEmptyBorder(30, 30, 10, 30));
-        panel.setLayout(new GridLayout(0, 1));
-        panel.add(button);
-        panel.add(label);
+        //panel = new JPanel();
+        frame.add(textField);
+        frame.add(button);
+        frame.add(label);
         
-        frame.add(panel, BorderLayout.CENTER);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setTitle("Client Server Authentication");
         frame.pack();
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
     public static void main(String[] args) {

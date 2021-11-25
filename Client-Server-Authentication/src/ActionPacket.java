@@ -24,7 +24,6 @@ public class ActionPacket implements Packet {
         this.source = source;
         this.destination = destination;
         this.protocol = "TCP/IP";
-
     }
 
 
@@ -45,15 +44,12 @@ public class ActionPacket implements Packet {
     @Override
     public String displayMessage(){
         return this.message;
-
     }
     
 
-    
     @Override
     public boolean actionComplete(){
         return this.actionComplete;
-
     }
 
     public String getSource(){

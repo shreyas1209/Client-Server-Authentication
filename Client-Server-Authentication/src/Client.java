@@ -2,21 +2,18 @@ import java.io.*;
 import java.net.*;
 
 
-
 public class Client {
     
     private Socket socket;
     private String ip_address;
     
     
-
     private Client(InetAddress serverAddress, int serverPort) throws Exception {
         this.socket = new Socket(serverAddress, serverPort);
     }
 
 
     private void start() throws Exception {
-        
         this.sendRequest();
     }
 
@@ -26,9 +23,8 @@ public class Client {
         String serverAddress = this.socket.getInetAddress().getHostAddress();
         data = in.readLine();
         System.out.println("\r\nMessage from Server at  " + serverAddress + ": " + data);
-        
-
     }
+
 
     public void sendRequest() throws Exception{
         String currentIP = this.getIPAddress();
@@ -58,11 +54,6 @@ public class Client {
             System.out.println("ERROR: Authentication failure!!!");
         }
         responseReader.close();
-
-
-
-        
-
     }
 
     public void authenticate(String validate) throws Exception{
@@ -73,18 +64,11 @@ public class Client {
             System.out.println("Message from Client to Server at "+this.socket.getInetAddress().getHostAddress()+": "+ validate );
             out.flush();
         }
-
-        
-
     }
 
     public String getIPAddress(){
         return this.ip_address;
-
     }
-
-
-
 
     public static void main(String[] args) throws NumberFormatException, UnknownHostException, Exception {
         try{BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -113,9 +97,5 @@ public class Client {
         System.out.println(e);
 
         }
-
-
-
-        
     }
 }
