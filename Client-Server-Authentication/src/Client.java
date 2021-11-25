@@ -12,18 +12,16 @@ public class Client {
         this.socket = new Socket(serverAddress, serverPort);
     }
 
+    public String getIPAddress(){
+        return this.ip_address;
+    }
+
 
     private void start() throws Exception {
         this.sendRequest();
     }
 
-    public void listen() throws Exception{
-        String data = null;
-        BufferedReader in = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
-        String serverAddress = this.socket.getInetAddress().getHostAddress();
-        data = in.readLine();
-        System.out.println("\r\nMessage from Server at  " + serverAddress + ": " + data);
-    }
+    
 
 
     public void sendRequest() throws Exception{
@@ -37,6 +35,24 @@ public class Client {
         
         out.flush();
         
+    }
+
+    public void listen() throws Exception{
+        String data = null;
+        BufferedReader in = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
+        String serverAddress = this.socket.getInetAddress().getHostAddress();
+        data = in.readLine();
+        System.out.println("\r\nMessage from Server at  " + serverAddress + ": " + data);
+    }
+
+    public void authenticate(String validate) throws Exception{
+        
+        PrintWriter out =  new PrintWriter(this.socket.getOutputStream(), true);
+        if((validate.equals("yes")) || (validate.equals("no"))){
+            out.println(validate);
+            System.out.println("Message from Client to Server at "+this.socket.getInetAddress().getHostAddress()+": "+ validate );
+            out.flush();
+        }
     }
 
     public void getResponse() throws IOException{
@@ -56,19 +72,9 @@ public class Client {
         responseReader.close();
     }
 
-    public void authenticate(String validate) throws Exception{
-        
-        PrintWriter out =  new PrintWriter(this.socket.getOutputStream(), true);
-        if((validate.equals("yes")) || (validate.equals("no"))){
-            out.println(validate);
-            System.out.println("Message from Client to Server at "+this.socket.getInetAddress().getHostAddress()+": "+ validate );
-            out.flush();
-        }
-    }
+    
 
-    public String getIPAddress(){
-        return this.ip_address;
-    }
+    
 
     public static void main(String[] args) throws NumberFormatException, UnknownHostException, Exception {
         try{BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -86,9 +92,7 @@ public class Client {
         System.out.println("\r\nConnected to Server: " +myClient.socket.getInetAddress());
         myClient.start();
         myClient.listen();
-        //System.out.println("Have you sent the request packet?");
         String ans = br.readLine().toLowerCase();
-        //System.out.println(ans);
         myClient.authenticate(ans);
         myClient.getResponse();
 

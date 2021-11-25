@@ -3,8 +3,8 @@ import java.net.*;
 
 public class Server {
     private String ipAddress;
-    private ServerSocket socket;
     private int port;
+    private ServerSocket socket;
     private InputStream inputStream;
     
     public Server(String ipAddress,int port) throws IOException{
@@ -16,6 +16,35 @@ public class Server {
         else{
             this.socket = new ServerSocket(this.port, 1, InetAddress.getLocalHost());
         }
+    }
+
+    
+    
+    public InetAddress getSocket(){
+        return this.socket.getInetAddress();
+    }
+
+    public int getPort(){
+        return this.socket.getLocalPort();
+    }
+
+    public void sendPromptMessage(Socket client) throws IOException{
+
+        PrintWriter serverOut = new PrintWriter(client.getOutputStream(),true);
+        serverOut.println("Have you sent the request packet? ");
+        System.out.println("\r\nMessage to  Client at " + client.getInetAddress().getHostAddress() + ": " + "Have you sent the request packet? " );
+        serverOut.flush();     
+    }
+
+    public void sendResponse(Socket client) throws IOException{
+        String data = 
+        "{'Host Name': 'localhost','Host ID' :'AelaP134k&6sjl','Encrypted Data' :'!&(@*&^%$!G*O)!('}";
+        ResponsePacket response = new ResponsePacket(this.getSocket().getHostAddress(),client.getInetAddress().getHostAddress(),"TCP/IP",data);
+        response.setMessage("Response sent");
+        PrintWriter serverOut = new PrintWriter(client.getOutputStream(),true);
+        serverOut.println(response);
+        serverOut.flush();
+
     }
 
     public void listen() throws Exception{
@@ -48,34 +77,6 @@ public class Server {
         }
     }
 
-    
-    public InetAddress getSocket(){
-        return this.socket.getInetAddress();
-    }
-
-    public int getPort(){
-        return this.socket.getLocalPort();
-    }
-
-    public void sendPromptMessage(Socket client) throws IOException{
-
-        PrintWriter serverOut = new PrintWriter(client.getOutputStream(),true);
-        serverOut.println("Have you sent the request packet? ");
-        System.out.println("\r\nMessage to  Client at " + client.getInetAddress().getHostAddress() + ": " + "Have you sent the request packet? " );
-        serverOut.flush();
-        //serverOut.close();     
-    }
-
-    public void sendResponse(Socket client) throws IOException{
-        String data = 
-        "{'Host Name': 'localhost','Host ID' :'AelaP134k&6sjl','Encrypted Data' :'!&(@*&^%$!G*O)!('}";
-        ResponsePacket response = new ResponsePacket(this.getSocket().getHostAddress(),client.getInetAddress().getHostAddress(),"TCP/IP",data);
-        response.setMessage("Response sent");
-        PrintWriter serverOut = new PrintWriter(client.getOutputStream(),true);
-        serverOut.println(response);
-        serverOut.flush();
-
-    }
     
     public static void main(String[] args) throws Exception {
         Server myServer = new Server ("127.0.0.1", 8000); //(args[0],Integer.parseInt(args[1]));
